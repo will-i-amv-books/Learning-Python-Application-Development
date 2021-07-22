@@ -49,13 +49,10 @@ RUNNING THE PROGRAM:
 :license: The MIT License (MIT) . See LICENSE file for further details.
 """
 import random
-import textwrap
 import sys
-from abc import ABCMeta, abstractmethod
-from gameuniterror import GameUnitError
-from gameutils import print_bold, weighted_random_selection
-from abstractgameunit import AbstractGameUnit
+from gameutils import print_bold
 from knight import Knight
+from orcrider import OrcRider
 from hut import Hut
 
 
@@ -65,22 +62,6 @@ if sys.version_info < (3, 0):
     "Python version: {}.{} ".format(sys.version_info[0], sys.version_info[1]))
     print("Exiting...")
     sys.exit(1)
-
-
-class OrcRider(AbstractGameUnit):
-    """Class that represents the game character Orc Rider"""
-    def __init__(self, name=''):
-        super().__init__(name=name)
-        self.max_hp = 30
-        self.health_meter = self.max_hp
-        self.unit_type = 'enemy'
-        self.hut_number = 0
-
-    def info(self):
-        """Print basic information about this character"""
-        print("Grrrr..I am an Orc Wolf Rider. Don't mess with me.")
-
-
 
 
 class AttackOfTheOrcs:
