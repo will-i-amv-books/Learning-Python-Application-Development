@@ -16,7 +16,6 @@ Packt Publishing.
 
 :license: The MIT License (MIT) . See LICENSE file for further details.
 """
-
 from __future__ import print_function
 import random
 from abc import ABCMeta, abstractmethod
@@ -59,13 +58,12 @@ class AbstractGameUnit(metaclass=ABCMeta):
         """Heal the unit replenishing its hit points"""
         if self.health_meter == self.max_hp:
             return
+
         if full_healing:
             self.health_meter = self.max_hp
         else:
             self.health_meter += heal_by
-        # ------------------------------------------------------------------
-        # raise a custom exception. Refer to chapter on exception handling
-        # ------------------------------------------------------------------
+
         if self.health_meter > self.max_hp:
             raise GameUnitError("health_meter > max_hp!", 101)
 
@@ -79,7 +77,7 @@ class AbstractGameUnit(metaclass=ABCMeta):
     def show_health(self, bold=False, end='\n'):
         """Print info on the current health reading of this game unit"""
         # TODO: what if there is no enemy?
-        msg = "Health: %s: %d" % (self.name, self.health_meter)
+        msg = "Health: {}: {}".format(self.name, self.health_meter)
 
         if bold:
             print_bold(msg, end=end)
