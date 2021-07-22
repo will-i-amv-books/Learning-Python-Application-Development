@@ -16,7 +16,6 @@ Packt Publishing.
 
 :license: The MIT License (MIT) . See LICENSE file for further details.
 """
-
 from __future__ import print_function
 from abstractgameunit import AbstractGameUnit
 from gameutils import print_bold
@@ -51,7 +50,7 @@ class Knight(AbstractGameUnit):
                   Example: Can you use self.enemy instead of calling
                   hut.occupant every time?
         """
-        print_bold("Entering hut %d..." % hut.number, end=' ')
+        print_bold("Entering hut {}...".format(hut.number), end=' ')
         is_enemy = (isinstance(hut.occupant, AbstractGameUnit) and
                     hut.occupant.unit_type == 'enemy')
         continue_attack = 'y'
@@ -63,6 +62,7 @@ class Knight(AbstractGameUnit):
             print_bold("Enemy sighted!")
             self.show_health(bold=True, end=' ')
             hut.occupant.show_health(bold=True, end=' ')
+
             while continue_attack:
                 continue_attack = input("\n...continue attack? (y/n): ")
                 if continue_attack == 'n':
@@ -97,6 +97,3 @@ class Knight(AbstractGameUnit):
         """
         print_bold("RUNNING AWAY...")
         self.enemy = None
-
-
-

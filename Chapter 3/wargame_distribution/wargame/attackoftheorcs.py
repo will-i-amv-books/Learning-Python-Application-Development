@@ -5,7 +5,7 @@ This module contains the AttackOfTheOrcs class implementation.
 This is the main class with the high level logic to play Attack of the Orcs
 game.
 
-This module is compatible with Python 2.7.9. It contains
+This module is compatible with Python 3.5.x. It contains
 supporting code for the book, Learning Python Application Development,
 Packt Publishing.
 
@@ -19,24 +19,21 @@ Packt Publishing.
 
 :license: The MIT License (MIT) . See LICENSE file for further details.
 """
-
 from __future__ import print_function
-import sys
-
-if sys.version_info >= (3, 0):
-    print("This code requires Python 2.7.9 ")
-    print("Looks like you are trying to run this using "
-          "Python version: %d.%d " % (sys.version_info[0],
-                                      sys.version_info[1]))
-    print("Exiting...")
-    sys.exit(1)
-
-
 import random
-from hut import Hut
+import sys
+from gameutils import print_bold
 from knight import Knight
 from orcrider import OrcRider
-from gameutils import print_bold
+from hut import Hut
+
+
+if sys.version_info < (3, 0):
+    print("This code requires Python 3.x and is tested with version 3.5.x ")
+    print("Looks like you are trying to run this using " + 
+    "Python version: {}.{} ".format(sys.version_info[0], sys.version_info[1]))
+    print("Exiting...")
+    sys.exit(1)
 
 
 class AttackOfTheOrcs:
@@ -66,19 +63,15 @@ class AttackOfTheOrcs:
         """Process the user input for choice of hut to enter"""
         verifying_choice = True
         idx = 0
-        print("Current occupants: %s" % self.get_occupants())
+        print("Current occupants: {}".format(self.get_occupants()))
+        
         while verifying_choice:
-            user_choice = raw_input("Choose a hut number to enter (1-5): ")
-            # --------------------------------------------------------------
-            # try...except illustration for chapter on exception handling.
-            # (Attack Of The Orcs v1.1.0)
-            # --------------------------------------------------------------
+            user_choice = input("Choose a hut number to enter (1-5): ")
             try:
                 idx = int(user_choice)
             except ValueError as e:
-                print("Invalid input, args: %s \n" % e.args)
+                print("Invalid input, args: {}\n".format(e.args))
                 continue
-
             try:
                 if self.huts[idx-1].is_acquired:
                     print("You have already acquired this hut. Try again."
@@ -86,22 +79,21 @@ class AttackOfTheOrcs:
                 else:
                     verifying_choice = False
             except IndexError:
-                print("Invalid input : ", idx)
+                print("Invalid input : {}".format(idx))
                 print("Number should be in the range 1-5. Try again")
                 continue
-
         return idx
 
     def _occupy_huts(self):
-        """Randomly occupy the huts with one of, friend, enemy or 'None'"""
+        """Randomly occupy the huts with one of: friend, enemy or 'None'"""
         for i in range(5):
             choice_lst = ['enemy', 'friend', None]
             computer_choice = random.choice(choice_lst)
             if computer_choice == 'enemy':
-                name = 'enemy-' + str(i+1)
+                name = 'enemy-{}'.format(str(i+1))
                 self.huts.append(Hut(i+1, OrcRider(name)))
             elif computer_choice == 'friend':
-                name = 'knight-' + str(i+1)
+                name = 'knight-{}'.format(str(i+1))
                 self.huts.append(Hut(i+1, Knight(name)))
             else:
                 self.huts.append(Hut(i+1, computer_choice))
@@ -115,18 +107,15 @@ class AttackOfTheOrcs:
         self.player = Knight()
         self._occupy_huts()
         acquired_hut_counter = 0
-
         self.show_game_mission()
         self.player.show_health(bold=True)
 
         while acquired_hut_counter < 5:
             idx = self._process_user_choice()
             self.player.acquire_hut(self.huts[idx-1])
-
             if self.player.health_meter <= 0:
                 print_bold("YOU LOSE  :(  Better luck next time")
                 break
-
             if self.huts[idx-1].is_acquired:
                 acquired_hut_counter += 1
 
@@ -137,4 +126,3 @@ class AttackOfTheOrcs:
 if __name__ == '__main__':
     game = AttackOfTheOrcs()
     game.play()
-

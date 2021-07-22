@@ -10,13 +10,12 @@ Packt Publishing.
 
 :license: The MIT License (MIT) . See LICENSE file for further details.
 """
-
 from __future__ import print_function
 from abstractgameunit import AbstractGameUnit
 
 
 class OrcRider(AbstractGameUnit):
-    """Class that represents the game character
+    """Class that represents the game character Orc Rider
 
     .. seealso:: The class `Knight` and the superclass `AbstractGameUnit`
     """
@@ -30,6 +29,3 @@ class OrcRider(AbstractGameUnit):
     def info(self):
         """Print basic information about this character."""
         print("Grrrr..I am an Orc Rider. Don't mess with me.")
-
-
-

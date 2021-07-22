@@ -32,7 +32,7 @@ class Hut:
         """Update the occupant of this hut"""
         self.occupant = new_occupant
         self.is_acquired = True
-        print_bold("GOOD JOB! Hut %d acquired" % self.number)
+        print_bold("GOOD JOB! Hut {} acquired".format(self.number))
 
     def get_occupant_type(self):
         """Return a string giving info on the hut occupant"""

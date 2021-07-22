@@ -2,7 +2,7 @@
 
 This module contains the AbstractGameUnit class implementation.
 
-This module is compatible with Python 2.7.9. It contains
+This module is compatible with Python 3.5.x. It contains
 supporting code for the book, Learning Python Application Development,
 Packt Publishing.
 
@@ -16,7 +16,6 @@ Packt Publishing.
 
 :license: The MIT License (MIT) . See LICENSE file for further details.
 """
-
 from __future__ import print_function
 import random
 from abc import ABCMeta, abstractmethod
@@ -24,10 +23,8 @@ from gameutils import print_bold, weighted_random_selection
 from gameuniterror import GameUnitError
 
 
-class AbstractGameUnit:
+class AbstractGameUnit(metaclass=ABCMeta):
     """Abstract class to represent a game character (or a 'unit')"""
-    __metaclass__ = ABCMeta
-
     def __init__(self, name=''):
         self.max_hp = 0
         self.health_meter = 0
@@ -61,13 +58,12 @@ class AbstractGameUnit:
         """Heal the unit replenishing its hit points"""
         if self.health_meter == self.max_hp:
             return
+
         if full_healing:
             self.health_meter = self.max_hp
         else:
             self.health_meter += heal_by
-        # ------------------------------------------------------------------
-        # raise a custom exception. Refer to chapter on exception handling
-        # ------------------------------------------------------------------
+
         if self.health_meter > self.max_hp:
             raise GameUnitError("health_meter > max_hp!", 101)
 
@@ -81,7 +77,7 @@ class AbstractGameUnit:
     def show_health(self, bold=False, end='\n'):
         """Print info on the current health reading of this game unit"""
         # TODO: what if there is no enemy?
-        msg = "Health: %s: %d" % (self.name, self.health_meter)
+        msg = "Health: {}: {}".format(self.name, self.health_meter)
 
         if bold:
             print_bold(msg, end=end)
