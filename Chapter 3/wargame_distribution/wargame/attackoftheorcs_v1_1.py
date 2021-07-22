@@ -55,6 +55,7 @@ from abc import ABCMeta, abstractmethod
 from gameuniterror import GameUnitError
 from gameutils import print_bold, weighted_random_selection
 from abstractgameunit import AbstractGameUnit
+from hut import Hut
 
 
 if sys.version_info < (3, 0):
@@ -143,28 +144,6 @@ class OrcRider(AbstractGameUnit):
         print("Grrrr..I am an Orc Wolf Rider. Don't mess with me.")
 
 
-class Hut:
-    """Class to create hut object(s) in the game Attack of the Orcs"""
-    def __init__(self, number, occupant):
-        self.occupant = occupant
-        self.number = number
-        self.is_acquired = False
-
-    def acquire(self, new_occupant):
-        """Update the occupant of this hut"""
-        self.occupant = new_occupant
-        self.is_acquired = True
-        print_bold("GOOD JOB! Hut {} acquired".format(self.number))
-
-    def get_occupant_type(self):
-        """Return a string giving info on the hut occupant"""
-        if self.is_acquired:
-            occupant_type = 'ACQUIRED'
-        elif self.occupant is None:
-            occupant_type = 'unoccupied'
-        else:
-            occupant_type = self.occupant.unit_type
-        return occupant_type
 
 
 class AttackOfTheOrcs:
