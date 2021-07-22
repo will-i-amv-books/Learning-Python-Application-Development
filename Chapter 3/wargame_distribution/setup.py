@@ -1,20 +1,18 @@
-from distutils.core import setup
+from setuptools import setup
+
 
 with open('README') as file:
     readme = file.read()
 
-# NOTE: change the 'name' field below with some unique package name.
-# then update the url field accordingly.
-
 setup(
-    name='testgamepkg_uniquename',
+    name='wsebas_attackoftheorcs',
     version='2.0.0',
     packages=['wargame'],
-    url='https://testpypi.python.org/pypi/testgamepkg_uniquename/',
+    url='https://pypi.org/project/wsebas_attackoftheorcs/',
     license='LICENSE.txt',
-    description='test pkg ignore',
+    description='My fantasy game',
+    long_description_content_type='text/x-rst',
     long_description=readme,
-    author='your_name',
-    author_email='your_email'
+    author='William',
+    author_email='william@gmail.com'
 )
-
