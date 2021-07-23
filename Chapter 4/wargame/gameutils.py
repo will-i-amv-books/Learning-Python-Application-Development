@@ -10,7 +10,6 @@ Packt Publishing.
 
 :license: The MIT License (MIT) . See LICENSE file for further details.
 """
-
 from __future__ import print_function
 import random
 
@@ -33,10 +32,8 @@ def weighted_random_selection(obj1, obj2):
     """
     weighted_list = 3 * [id(obj1)] + 7 * [id(obj2)]
     selection = random.choice(weighted_list)
-
     if selection == id(obj1):
         return obj1
-
     return obj2
 
 
