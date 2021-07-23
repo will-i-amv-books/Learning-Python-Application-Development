@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Install the package
+
+pip install Sphinx
+
 # Go to app's docs directory, and run sphinx-quickstart
 
 cd ./wargame
