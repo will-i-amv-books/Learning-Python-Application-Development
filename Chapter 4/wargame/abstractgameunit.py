@@ -10,7 +10,6 @@ Packt Publishing.
 
 :license: The MIT License (MIT) . See LICENSE file for further details.
 """
-
 from __future__ import print_function
 import random
 from abc import ABCMeta, abstractmethod
@@ -33,7 +32,6 @@ class AbstractGameUnit(metaclass=ABCMeta):
 
     .. seealso:: Classes :py:class:`Knight` and :py:class:`OrcRider`
     """
-
     def __init__(self, name=''):
         self.max_hp = 0
         self.health_meter = 0
@@ -87,16 +85,14 @@ class AbstractGameUnit(metaclass=ABCMeta):
         .. todo:: Add exception handling code , assert heal_by amount is within
                   limits! (exercise)
         """
-        # Do not continue if the game unit already has full health
         if self.health_meter == self.max_hp:
             return
+
         if full_healing:
             self.health_meter = self.max_hp
         else:
             self.health_meter += heal_by
-        # ------------------------------------------------------------------
-        # raise a custom exception. Refer to chapter on exception handling
-        # ------------------------------------------------------------------
+
         if self.health_meter > self.max_hp:
             raise GameUnitError("health_meter > max_hp!", 101)
 
@@ -119,7 +115,7 @@ class AbstractGameUnit(metaclass=ABCMeta):
                     character should be appended in the end or you just want to
                     add a space or a tab (for message continuation)
         """
-        msg = "Health: %s: %d" % (self.name, self.health_meter)
+        msg = "Health: {}: {}".format(self.name, self.health_meter)
 
         if bold:
             print_bold(msg, end=end)
