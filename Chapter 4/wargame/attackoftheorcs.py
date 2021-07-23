@@ -10,24 +10,21 @@ Packt Publishing.
 
 :license: The MIT License (MIT) . See LICENSE file for further details.
 """
-
 from __future__ import print_function
+import random
 import sys
+from gameutils import print_bold
+from knight import Knight
+from orcrider import OrcRider
+from hut import Hut
+
 
 if sys.version_info < (3, 0):
     print("This code requires Python 3.x and is tested with version 3.5.x ")
-    print("Looks like you are trying to run this using "
-          "Python version: %d.%d " % (sys.version_info[0],
-                                      sys.version_info[1]))
+    print("Looks like you are trying to run this using " + 
+    "Python version: {}.{} ".format(sys.version_info[0], sys.version_info[1]))
     print("Exiting...")
     sys.exit(1)
-
-
-import random
-from hut import Hut
-from knight import Knight
-from orcrider import OrcRider
-from gameutils import print_bold
 
 
 class AttackOfTheOrcs:
@@ -47,7 +44,7 @@ class AttackOfTheOrcs:
     def get_occupants(self):
         """Return a list of occupant types for all huts.
 
-        This is mainly used for printing information on current status of the hut
+        This is used for printing information on current status of the hut
         (whether unoccupied or acquired etc)
 
         If the occupant is not `None` the occupant type will be 'enemy' or
@@ -83,17 +80,14 @@ class AttackOfTheOrcs:
         """
         verifying_choice = True
         idx = 0
-        print("Current occupants: %s" % self.get_occupants())
+        print("Current occupants: {}".format(self.get_occupants()))
+
         while verifying_choice:
             user_choice = input("Choose a hut number to enter (1-5): ")
-            # --------------------------------------------------------------
-            # try...except illustration for chapter on exception handling.
-            # (Attack Of The Orcs v1.1.0)
-            # --------------------------------------------------------------
             try:
                 idx = int(user_choice)
             except ValueError as e:
-                print("Invalid input, args: %s \n" % e.args)
+                print("Invalid input, args: {}\n".format(e.args))
                 continue
 
             try:
@@ -103,10 +97,10 @@ class AttackOfTheOrcs:
                 else:
                     verifying_choice = False
             except IndexError:
-                print("Invalid input : ", idx)
+                print("Invalid input : {}".format(idx))
                 print("Number should be in the range 1-5. Try again")
                 continue
-
+        
         return idx
 
     def _occupy_huts(self):
@@ -121,10 +115,10 @@ class AttackOfTheOrcs:
             choice_lst = ['enemy', 'friend', None]
             computer_choice = random.choice(choice_lst)
             if computer_choice == 'enemy':
-                name = 'enemy-' + str(i+1)
+                name = 'enemy-{}'.format(str(i+1))
                 self.huts.append(Hut(i+1, OrcRider(name)))
             elif computer_choice == 'friend':
-                name = 'knight-' + str(i+1)
+                name = 'knight-{}'.format(str(i+1))
                 self.huts.append(Hut(i+1, Knight(name)))
             else:
                 self.huts.append(Hut(i+1, computer_choice))
