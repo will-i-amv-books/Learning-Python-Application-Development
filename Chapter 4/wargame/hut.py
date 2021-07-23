@@ -10,7 +10,6 @@ Packt Publishing.
 
 :license: The MIT License (MIT) . See LICENSE file for further details.
 """
-
 from __future__ import print_function
 from gameutils import print_bold
 
@@ -55,7 +54,7 @@ class Hut:
         """
         self.occupant = new_occupant
         self.is_acquired = True
-        print_bold("GOOD JOB! Hut %d acquired" % self.number)
+        print_bold("GOOD JOB! Hut {} acquired".format(self.number))
 
     def get_occupant_type(self):
         """Return a string giving info on occupant type.
@@ -78,5 +77,4 @@ class Hut:
             occupant_type = 'unoccupied'
         else:
             occupant_type = self.occupant.unit_type
-
         return occupant_type
