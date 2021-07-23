@@ -10,7 +10,6 @@ Packt Publishing.
 
 :license: The MIT License (MIT) . See LICENSE file for further details.
 """
-
 from __future__ import print_function
 from abstractgameunit import AbstractGameUnit
 from gameutils import print_bold
@@ -54,7 +53,7 @@ class Knight(AbstractGameUnit):
                   Example: Can you use self.enemy instead of calling
                   hut.occupant every time?
         """
-        print_bold("Entering hut %d..." % hut.number, end=' ')
+        print_bold("Entering hut {}...".format(hut.number), end=' ')
         is_enemy = (isinstance(hut.occupant, AbstractGameUnit) and
                     hut.occupant.unit_type == 'enemy')
         continue_attack = 'y'
@@ -67,28 +66,18 @@ class Knight(AbstractGameUnit):
             self.show_health(bold=True, end=' ')
             hut.occupant.show_health(bold=True, end=' ')
 
-            # Attack the enemy until the player says so.
-            # TODO: The user must select either 'y' or 'n'. In
-            # the current implementation there is a bug where you
-            # do not need to enter 'y'... fix this as an exercise!
             while continue_attack:
                 continue_attack = input("\n...continue attack? (y/n): ")
                 if continue_attack == 'n':
                     self.run_away()
                     break
 
-                # Player wants to attack, call the attack method.
                 self.attack(hut.occupant)
 
-                # This turn (iteration) of the combat is over, Check
-                # if Player has won
                 if hut.occupant.health_meter <= 0:
                     print("")
                     hut.acquire(self)
                     break
-
-                # Player's health_meter is empty..
-                # This indicates Player has lost the combat
                 if self.health_meter <= 0:
                     print("")
                     break
